@@ -45,6 +45,80 @@
 | 2026/05/30    | 予選会 @麻布台ヒルズ AWS オフィス (MVP デモ + プレゼン)     |
 | 2026/06/26    | 決勝 @幕張メッセ AWS Summit Japan 2026          |
 
+## AI-DLC Inception フェーズ概要
+
+5/10 の応募締切までに **Inception フェーズを完了** させる必要があります。AI-DLC は 3 フェーズ構造 (Inception → Construction → Operations) ですが、書類審査の対象になるのは Inception フェーズのみです。
+
+### Inception フェーズの目的
+
+**「何を / なぜ」作るか** を明確化するフェーズ。実装前に、ビジネス意図・要件・ユーザー像・全体設計・実装単位 (Unit of Work) をドキュメント化します。
+
+### Inception フェーズのステージ
+
+| #  | ステージ                     | 区分          | 内容                                       | 本プロジェクトでの実行 |
+| -- | ------------------------ | ----------- | ---------------------------------------- | ----------- |
+| 1  | Workspace Detection      | ALWAYS      | プロジェクト状態判定 (新規 / 既存)                     | 新規 (Greenfield) として実行 |
+| 2  | Reverse Engineering      | CONDITIONAL | 既存コード解析                                  | スキップ (新規開発のため) |
+| 3  | Requirements Analysis    | ALWAYS      | Intent / 機能要件 / 非機能要件                    | 実行           |
+| 4  | User Stories             | CONDITIONAL | ペルソナ + ユーザーストーリー                         | 実行 (ユーザー向けサービスのため) |
+| 5  | Workflow Planning        | ALWAYS      | 後続フェーズの実行計画                              | 実行           |
+| 6  | Application Design       | CONDITIONAL | コンポーネント / サービス分割                         | 実行 (新規アーキ設計のため) |
+| 7  | Units Generation         | CONDITIONAL | 実装単位 (Unit of Work) 分解                   | 実行 (Unit 分解は審査観点のため) |
+
+### フロー (本プロジェクト Greenfield 版)
+
+```
+Workspace Detection (新規確認)
+        ↓
+Requirements Analysis (Intent + 機能要件 + 非機能要件)
+        ↓
+User Stories (ペルソナ + ストーリー)
+        ↓
+Workflow Planning (後続実行計画)
+        ↓
+Application Design (コンポーネント / サービス分割)
+        ↓
+Units Generation (Unit of Work 分解 + ストーリーマップ)
+        ↓
+=== 5/10 提出ライン ===
+        ↓
+Construction (5/30 予選会 MVP に向けて)
+```
+
+### 進行ルール
+
+- **各ステージ終了時にチーム承認**: 自動で次に進まない。「Request Changes」または「Continue」の 2 択
+- **質問形式**: AI が聞く質問は専用 `.md` に記載、**A / B / C / D / E** の選択式で `[Answer]:` タグに回答 (E = Other で自由記述可)
+- **状態管理**: `aidlc-docs/aidlc-state.md` でフェーズ進行状態を管理し、最終的に **Inception 完了** に更新する
+- **監査ログ**: `aidlc-docs/audit.md` に全ユーザー入力・AI 応答を ISO8601 タイムスタンプ付で記録
+- **チーム作業前提**: 関係者を巻き込み、各フェーズのレビュー・承認を実施
+
+### 各ステージで具体的に作るもの
+
+#### Requirements Analysis
+- サービスのコア Intent (なぜ作るのか) を 1〜2 文で明確化
+- 機能要件 / 非機能要件 (性能・コスト・セキュリティ・倫理境界)
+- 曖昧な点は `requirement-verification-questions.md` で確認
+
+#### User Stories
+- ペルソナ (どんな人が使うか)
+- "As a 〜 / I want 〜 / So that 〜" 形式のストーリー
+- ストーリーごとの受け入れ基準
+
+#### Application Design
+- 全体アーキ図 (どんなコンポーネントが何個)
+- サービス分割 (Bedrock / Lambda / S3 等の AWS マッピング)
+- コンポーネント間 API / 依存関係
+
+#### Units Generation
+- 開発単位 (Unit of Work) 分解
+- Unit ↔ ストーリー対応マップ
+- Unit 間の依存・実装順
+
+### 詳細ルール
+
+各ステージの詳細手順は [`.aidlc-rule-details/inception/`](./.aidlc-rule-details/inception/) を参照。
+
 ## 5/10 提出物 (書類審査用 Inception 成果物)
 
 5/10 までに、本リポジトリの `aidlc-docs/` 配下に AI-DLC Inception フェーズの成果物一式を公開する必要があります。
