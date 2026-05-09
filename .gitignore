@@ -10,3 +10,6 @@ Thumbs.db
 .idea/
 *.swp
 *~
+
+# Local-only files (meeting notes, scratch, personal memos)
+.local/
